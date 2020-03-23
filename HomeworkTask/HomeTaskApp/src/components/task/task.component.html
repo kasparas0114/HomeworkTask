@@ -1,0 +1,23 @@
+<h2>Insert array of values separated by whitespace</h2>
+<textarea (change)="onValueChange($event.target.value)">{{getCurrentArray()}}</textarea>
+
+<div class="error" *ngIf="isInvalid">
+    Values provided in the array do not meet the criteria
+</div>
+
+<div id="buttons">
+    <button id="button" type="button" [disabled]="isInvalid" (click)="getIsReachable()">Is Goal Reachable?</button>
+    <button id="button" type="button" [disabled]="isInvalid" (click)="getMostEfficient()">Most Efficient Path</button>
+</div>
+
+<div class="loading" [hidden]="!isLoading">
+    Loading..
+</div>
+<div *ngIf="efficientPaths && efficientPaths.length > 0">
+    <h2 *ngIf="efficientPaths && efficientPaths.length > 1"> There are {{efficientPaths.length}} equally efficient paths</h2>
+    <table>
+        <tr *ngFor="let path of efficientPaths">
+            <td *ngFor="let item of path; let i = index"> (I - {{item.Index}}; V - {{item.Value}}) </td>
+        </tr>
+    </table>
+</div>
